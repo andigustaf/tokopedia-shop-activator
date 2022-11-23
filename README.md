@@ -1,2 +1,2 @@
 # tokopedia-shop-activator
-This app will add 
+This script will add tokopedia domain on shop console
