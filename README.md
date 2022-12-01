@@ -9,6 +9,7 @@ for acquiring the TOTP secret you need to register a phone number in your tokope
 
 CAUTION, https://accounts.tokopedia.com/api/authorize will return 403 if you're using certain user-agent, and doesn't let you log in with some error. i'd suggest you to use other user-agent, just try using `headless : false`  to debug.
 
+if built in puppeteer browser does not work, use other browser by changing the `executablePath` of puppeteer, for example `executablePath: "/usr/bin/chromium"`
 
 # Running
 
