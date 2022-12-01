@@ -25,10 +25,10 @@ const config = JSON.parse(fs.readFileSync('credential.json'));
     ];
     const browser = await puppeteer.launch({
         timeout: 0,
-        // userDataDir: "./user_data",
+        userDataDir: "./user_data",
         // executablePath : "/Applications/Chromium.app/Contents/MacOS/Chromium",
         // executablePath: "/usr/bin/chromium",
-        headless: false,
+        headless: true,
         args: argsz
     });
     const page = await browser.newPage();

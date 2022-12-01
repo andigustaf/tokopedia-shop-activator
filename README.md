@@ -7,7 +7,8 @@ you need to add your credential to the credential.json, you can see the format i
 
 for acquiring the TOTP secret you need to register a phone number in your tokopedia account, then you can activate the 2FA google authenticator settings, the secret will be shown below the qr code.
 
-for some reason, https://accounts.tokopedia.com/api/authorize will return 403 if you're using the built in chromium on puppeteer, and doesn't let you log in with some error. i'd suggest you to use other browser.
+CAUTION, https://accounts.tokopedia.com/api/authorize will return 403 if you're using certain user-agent, and doesn't let you log in with some error. i'd suggest you to use other user-agent, just try using `headless : false`  to debug.
+
 
 # Running
 
@@ -64,7 +65,7 @@ if failed
     "data": {
         "status": 500,
         "message": "Error from tokopedia when activating : Shop Domain Not Found",
-        "code": 0,
+        "code": 2,
         "identifier": identifier,
         "domain": "testing for activation"
     },
@@ -72,8 +73,9 @@ if failed
 }
 ```
 the error code would be [0,1,2]
- - 0 would be "Shop Type Is Not Official Store or Power Merchant", since tokopedia requiring seller to be a PM or OS to use 3rd party enabler.
- - 1 would be "Shop has been connected to another app of your organization", this means the domain that you tried to add is already integrated to the fs_id of one of your applications.
+ - "0" would be "Shop Type Is Not Official Store or Power Merchant", since tokopedia requiring seller to be a PM or OS to use 3rd party enabler.
+ - "1" would be "Shop has been connected to another app of your organization", this means the domain that you tried to add is already integrated to the fs_id of one of your applications.
+- "2" would be "Shop Domain Not Found", this means the domain that you tried to add is not found, either typo or has been changed.
 
 if there  are changes in the UI, the error would be 
 ```
