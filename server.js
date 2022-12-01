@@ -6,7 +6,6 @@ const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
 const totp = require("totp-generator");
 const fs = require('fs');
-const UserAgent = require("user-agents");
 
 const config = JSON.parse(fs.readFileSync('credential.json'));
 (async function() {
@@ -17,30 +16,18 @@ const config = JSON.parse(fs.readFileSync('credential.json'));
     await puppeteer.use(AdblockerPlugin({
         blockTrackers: true
     }))
-    const userAgent = new UserAgent({
-        platform: 'MacIntel',
-        deviceCategory: 'desktop'
-    });
-    const userAgentStr = userAgent.toString();
-    const anonymizeUserAgentPlugin = require('puppeteer-extra-plugin-anonymize-ua')({
-        customFn: () => userAgentStr,
-        stripHeadless: true,
-        makeWindows: false,
-    });
-    await puppeteer.use(anonymizeUserAgentPlugin);
-
     const argsz = [
         "--no-sandbox",
         "--no-first-run",
         "--lang=en-US,en",
         "--window-size=1920x1080",
-        // '--user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36"'
+        '--user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"'
     ];
     const browser = await puppeteer.launch({
         timeout: 0,
         // userDataDir: "./user_data",
         // executablePath : "/Applications/Chromium.app/Contents/MacOS/Chromium",
-        executablePath: "/usr/bin/chromium",
+        // executablePath: "/usr/bin/chromium",
         headless: false,
         args: argsz
     });
@@ -50,6 +37,7 @@ const config = JSON.parse(fs.readFileSync('credential.json'));
         waitUntil: 'load'
     });
     await new Promise(resolve => setTimeout(resolve, 2000));
+    // console.log(`User Agent: ${await browser.userAgent()}`);
     try {
         await loginTokopedia(page);
     } catch (e) {
@@ -393,5 +381,4 @@ const config = JSON.parse(fs.readFileSync('credential.json'));
             await new Promise(resolve => setTimeout(resolve, 3000));
         }
     }
-
 })();

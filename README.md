@@ -65,7 +65,7 @@ if failed
         "status": 500,
         "message": "Error from tokopedia when activating : Shop Domain Not Found",
         "code": 0,
-        "identifier": 60497,
+        "identifier": identifier,
         "domain": "testing for activation"
     },
     "status": 200
