@@ -57,7 +57,7 @@ the response will be
     "status": 200
 }
 ```
-CAUTION if you add the same shop domain twice and the user hasn't confirm the email the response would be still success but tokopedia WILL NOT RESEND the email. so either you need to resend it manually or the user accept the confirmation via Tokopedia Seller center in the pengaturan pihak ketika section.
+CAUTION if you add the same shop domain twice and the user hasn't confirm the email the response would be still success but tokopedia WILL NOT RESEND the email. so either you need to resend it manually or the user to accept the confirmation via Tokopedia Seller center in the "pengaturan pihak ketiga" section.
 
 
 if failed 
