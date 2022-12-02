@@ -334,7 +334,9 @@ const config = JSON.parse(fs.readFileSync('credential.json'));
 
     function callback(messages) {
         if (config.callback_url !== '') {
-            axios.post(config.callback_url, messages, config.callback_header)
+            axios.post(config.callback_url, messages, {
+                    headers: config.callback_headers
+                })
                 .then((response) => {
                     console.log(response)
                 });
